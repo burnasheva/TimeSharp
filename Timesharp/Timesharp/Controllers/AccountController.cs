@@ -123,11 +123,8 @@ namespace Timesharp.Controllers
 
         #endregion
 
-        // GET api/Account/UserInfo
 
-        // POST api/Account/AddExternalLogin
         #region Public Methods and Operators
-
         /// <summary>
         /// The add external login.
         /// </summary>

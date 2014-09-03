@@ -10,6 +10,7 @@
 namespace Timesharp.Models.EmployeeContext
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -36,16 +37,19 @@ namespace Timesharp.Models.EmployeeContext
         /// <summary>
         /// Gets or sets the first name.
         /// </summary>
+        [Required]
         string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>
+        [Required]
         string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the middle name.
         /// </summary>
+        [Required]
         string MiddleName { get; set; }
 
         #endregion
@@ -57,12 +61,14 @@ namespace Timesharp.Models.EmployeeContext
     /// </summary>
     public class User : IdentityUser, IUser
     {
+        //TODO separate profile and user
+
         #region Public Properties
 
         /// <summary>
         /// Gets or sets the current position.
         /// </summary>
-        public Position CurrentPosition { get; set; }
+        public virtual Position CurrentPosition { get; set; }
 
         /// <summary>
         /// Gets or sets the employment periods.

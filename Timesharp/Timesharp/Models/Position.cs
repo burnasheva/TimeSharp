@@ -33,10 +33,7 @@ namespace Timesharp.Models
         /// </summary>
         public string Title { get; set; }
 
-        /// <summary>
-        /// Gets or sets the user.
-        /// </summary>
-        public virtual User User { get; set; }
+        //TODO: should I have a connection to user from position
 
         #endregion
 

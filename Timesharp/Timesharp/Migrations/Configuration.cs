@@ -6,25 +6,42 @@
 //   The configuration.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Timesharp.Migrations
 {
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using Timesharp.Models;
+    using Timesharp.Models.EmployeeContext;
 
     /// <summary>
-    /// The configuration.
+    ///     The configuration. See
+    ///     http://www.asp.net/web-api/overview/creating-web-apis/using-web-api-with-entity-framework/part-3
     /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<TimesharpDbContext>
     {
+        // TODO document this admin account somewhere?
+        #region Constants
+
+        /// <summary>
+        ///     The admin password.
+        /// </summary>
+        private const string AdminPassword = "1337pa$$word";
+
+        /// <summary>
+        ///     The admin user name.
+        /// </summary>
+        private const string AdminUserName = "admin";
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Configuration"/> class.
+        ///     Initializes a new instance of the <see cref="Configuration" /> class.
         /// </summary>
         public Configuration()
         {
@@ -43,41 +60,39 @@ namespace Timesharp.Migrations
         /// </param>
         protected override void Seed(TimesharpDbContext context)
         {
-            this.CreateRoleIfNotExists(context, Roles.Employee);
-            this.CreateRoleIfNotExists(context, Roles.Manager);
-            this.CreateRoleIfNotExists(context, Roles.Executive);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            this.CreateRoleIfNotExists(roleManager, RoleNames.Employee);
+            this.CreateRoleIfNotExists(roleManager, RoleNames.Manager);
+            this.CreateRoleIfNotExists(roleManager, RoleNames.Executive);
+            context.SaveChanges();
 
-            // TODO create executive user.
+            if (!context.Users.Any(u => u.UserName == AdminUserName))
+            {
+                var userManager = new UserManager<User>(new UserStore<User>(context));
+                var user = new User { UserName = AdminUserName };
 
-            // This method will be called after migrating to the latest version.
+                userManager.Create(user, AdminPassword);
+                userManager.AddToRole(user.Id, RoleNames.Executive);
+            }
 
-            // You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            // to avoid creating duplicate seed data. E.g.
-            // context.People.AddOrUpdate(
-            // p => p.FullName,
-            // new Person { FullName = "Andrew Peters" },
-            // new Person { FullName = "Brice Lambson" },
-            // new Person { FullName = "Rowan Miller" }
-            // );
+            context.SaveChanges();
         }
 
         /// <summary>
         /// The create role if not exists.
         /// </summary>
-        /// <param name="context">
-        /// The context.
+        /// <param name="roleManager">
+        /// The role Manager.
         /// </param>
-        /// <param name="role">
-        /// The role.
+        /// <param name="roleName">
+        /// The role Name.
         /// </param>
-        private void CreateRoleIfNotExists(TimesharpDbContext context, string role)
+        private void CreateRoleIfNotExists(RoleManager<IdentityRole> roleManager, string roleName)
         {
-            // See https://stackoverflow.com/questions/21170525/cant-connect-to-database-to-execute-identity-functions
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            if (!roleManager.RoleExists(role))
+            if (!roleManager.RoleExists(roleName))
             {
-                roleManager.Create(new IdentityRole(role));
+                var role = new IdentityRole { Name = roleName };
+                roleManager.Create(role);
             }
         }
 

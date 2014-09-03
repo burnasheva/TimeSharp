@@ -18,7 +18,7 @@ namespace Timesharp.Models
     /// <summary>
     /// The roles.
     /// </summary>
-    public static class Roles
+    public static class RoleNames
     {
         // User can set their own hours.
         #region Constants
