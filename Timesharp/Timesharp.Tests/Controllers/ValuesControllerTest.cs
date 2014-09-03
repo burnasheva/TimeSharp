@@ -1,23 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Web.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Timesharp;
-using Timesharp.Controllers;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ValuesControllerTest.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The values controller test.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Timesharp.Tests.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Timesharp.Controllers;
+
+    /// <summary>
+    /// The values controller test.
+    /// </summary>
     [TestClass]
     public class ValuesControllerTest
     {
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The delete.
+        /// </summary>
+        [TestMethod]
+        public void Delete()
+        {
+            // Arrange
+            var controller = new ValuesController();
+
+            // Act
+            controller.Delete(5);
+
+            // Assert
+        }
+
+        /// <summary>
+        /// The get.
+        /// </summary>
         [TestMethod]
         public void Get()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ValuesController();
 
             // Act
             IEnumerable<string> result = controller.Get();
@@ -29,11 +58,14 @@ namespace Timesharp.Tests.Controllers
             Assert.AreEqual("value2", result.ElementAt(1));
         }
 
+        /// <summary>
+        /// The get by id.
+        /// </summary>
         [TestMethod]
         public void GetById()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ValuesController();
 
             // Act
             string result = controller.Get(5);
@@ -42,11 +74,14 @@ namespace Timesharp.Tests.Controllers
             Assert.AreEqual("value", result);
         }
 
+        /// <summary>
+        /// The post.
+        /// </summary>
         [TestMethod]
         public void Post()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ValuesController();
 
             // Act
             controller.Post("value");
@@ -54,11 +89,14 @@ namespace Timesharp.Tests.Controllers
             // Assert
         }
 
+        /// <summary>
+        /// The put.
+        /// </summary>
         [TestMethod]
         public void Put()
         {
             // Arrange
-            ValuesController controller = new ValuesController();
+            var controller = new ValuesController();
 
             // Act
             controller.Put(5, "value");
@@ -66,16 +104,6 @@ namespace Timesharp.Tests.Controllers
             // Assert
         }
 
-        [TestMethod]
-        public void Delete()
-        {
-            // Arrange
-            ValuesController controller = new ValuesController();
-
-            // Act
-            controller.Delete(5);
-
-            // Assert
-        }
+        #endregion
     }
 }

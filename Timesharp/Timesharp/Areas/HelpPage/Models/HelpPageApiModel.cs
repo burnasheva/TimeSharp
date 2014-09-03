@@ -1,101 +1,131 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net.Http.Headers;
-using System.Web.Http.Description;
-using Timesharp.Areas.HelpPage.ModelDescriptions;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HelpPageApiModel.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The model that represents an API displayed on the help page.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Timesharp.Areas.HelpPage.Models
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Net.Http.Headers;
+    using System.Web.Http.Description;
+
+    using Timesharp.Areas.HelpPage.ModelDescriptions;
+
     /// <summary>
-    /// The model that represents an API displayed on the help page.
+    ///     The model that represents an API displayed on the help page.
     /// </summary>
     public class HelpPageApiModel
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="HelpPageApiModel"/> class.
+        ///     Initializes a new instance of the <see cref="HelpPageApiModel" /> class.
         /// </summary>
         public HelpPageApiModel()
         {
-            UriParameters = new Collection<ParameterDescription>();
-            SampleRequests = new Dictionary<MediaTypeHeaderValue, object>();
-            SampleResponses = new Dictionary<MediaTypeHeaderValue, object>();
-            ErrorMessages = new Collection<string>();
+            this.UriParameters = new Collection<ParameterDescription>();
+            this.SampleRequests = new Dictionary<MediaTypeHeaderValue, object>();
+            this.SampleResponses = new Dictionary<MediaTypeHeaderValue, object>();
+            this.ErrorMessages = new Collection<string>();
         }
 
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
-        /// Gets or sets the <see cref="ApiDescription"/> that describes the API.
+        ///     Gets or sets the <see cref="ApiDescription" /> that describes the API.
         /// </summary>
         public ApiDescription ApiDescription { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="ParameterDescription"/> collection that describes the URI parameters for the API.
+        ///     Gets the error messages associated with this model.
         /// </summary>
-        public Collection<ParameterDescription> UriParameters { get; private set; }
+        public Collection<string> ErrorMessages { get; private set; }
 
         /// <summary>
-        /// Gets or sets the documentation for the request.
-        /// </summary>
-        public string RequestDocumentation { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="ModelDescription"/> that describes the request body.
-        /// </summary>
-        public ModelDescription RequestModelDescription { get; set; }
-
-        /// <summary>
-        /// Gets the request body parameter descriptions.
+        ///     Gets the request body parameter descriptions.
         /// </summary>
         public IList<ParameterDescription> RequestBodyParameters
         {
             get
             {
-                return GetParameterDescriptions(RequestModelDescription);
+                return GetParameterDescriptions(this.RequestModelDescription);
             }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="ModelDescription"/> that describes the resource.
+        ///     Gets or sets the documentation for the request.
+        /// </summary>
+        public string RequestDocumentation { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the <see cref="ModelDescription" /> that describes the request body.
+        /// </summary>
+        public ModelDescription RequestModelDescription { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the <see cref="ModelDescription" /> that describes the resource.
         /// </summary>
         public ModelDescription ResourceDescription { get; set; }
 
         /// <summary>
-        /// Gets the resource property descriptions.
+        ///     Gets the resource property descriptions.
         /// </summary>
         public IList<ParameterDescription> ResourceProperties
         {
             get
             {
-                return GetParameterDescriptions(ResourceDescription);
+                return GetParameterDescriptions(this.ResourceDescription);
             }
         }
 
         /// <summary>
-        /// Gets the sample requests associated with the API.
+        ///     Gets the sample requests associated with the API.
         /// </summary>
         public IDictionary<MediaTypeHeaderValue, object> SampleRequests { get; private set; }
 
         /// <summary>
-        /// Gets the sample responses associated with the API.
+        ///     Gets the sample responses associated with the API.
         /// </summary>
         public IDictionary<MediaTypeHeaderValue, object> SampleResponses { get; private set; }
 
         /// <summary>
-        /// Gets the error messages associated with this model.
+        ///     Gets or sets the <see cref="ParameterDescription" /> collection that describes the URI parameters for the API.
         /// </summary>
-        public Collection<string> ErrorMessages { get; private set; }
+        public Collection<ParameterDescription> UriParameters { get; private set; }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The get parameter descriptions.
+        /// </summary>
+        /// <param name="modelDescription">
+        /// The model description.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IList"/>.
+        /// </returns>
         private static IList<ParameterDescription> GetParameterDescriptions(ModelDescription modelDescription)
         {
-            ComplexTypeModelDescription complexTypeModelDescription = modelDescription as ComplexTypeModelDescription;
+            var complexTypeModelDescription = modelDescription as ComplexTypeModelDescription;
             if (complexTypeModelDescription != null)
             {
                 return complexTypeModelDescription.Properties;
             }
 
-            CollectionModelDescription collectionModelDescription = modelDescription as CollectionModelDescription;
+            var collectionModelDescription = modelDescription as CollectionModelDescription;
             if (collectionModelDescription != null)
             {
-                complexTypeModelDescription = collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
+                complexTypeModelDescription =
+                    collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
                 if (complexTypeModelDescription != null)
                 {
                     return complexTypeModelDescription.Properties;
@@ -104,5 +134,7 @@ namespace Timesharp.Areas.HelpPage.Models
 
             return null;
         }
+
+        #endregion
     }
 }

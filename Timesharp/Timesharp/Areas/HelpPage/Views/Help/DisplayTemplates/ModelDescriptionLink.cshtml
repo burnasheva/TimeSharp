@@ -1,3 +1,5 @@
+@using System.IO
+@using System.Web.WebPages
 @using Timesharp.Areas.HelpPage.ModelDescriptions
 @model Type
 @{
@@ -16,11 +18,12 @@
     else if (modelDescription is CollectionModelDescription)
     {
         var collectionDescription = modelDescription as CollectionModelDescription;
-        var elementDescription = collectionDescription.ElementDescription;
+        ModelDescription elementDescription = collectionDescription.ElementDescription;
         @:Collection of @Html.DisplayFor(m => elementDescription.ModelType, "ModelDescriptionLink", new { modelDescription = elementDescription })
     }
     else
     {
         @Html.DisplayFor(m => modelDescription)
     }
+
 }

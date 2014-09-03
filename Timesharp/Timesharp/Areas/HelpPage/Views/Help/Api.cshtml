@@ -1,9 +1,10 @@
-@using System.Web.Http
-@using Timesharp.Areas.HelpPage.Models
-@model HelpPageApiModel
+@using System.IO
+@using System.Web.Http.Description
+@using System.Web.WebPages
+@model Timesharp.Areas.HelpPage.Models.HelpPageApiModel
 
 @{
-    var description = Model.ApiDescription;
+    ApiDescription description = Model.ApiDescription;
     ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
 }
 

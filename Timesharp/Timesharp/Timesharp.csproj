@@ -205,6 +205,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\TimeEntry.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\EmploymentPeriod.cs" />
     <Compile Include="Models\IdentityModels.cs" />

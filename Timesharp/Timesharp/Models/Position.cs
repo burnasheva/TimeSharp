@@ -1,29 +1,27 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EmploymentPeriod.cs" company="">
+// <copyright file="Position.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   The employment period.
+//   The position.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Timesharp.Models
 {
-    using System;
-
     using Timesharp.Models.EmployeeContext;
 
     /// <summary>
-    /// The employment period.
+    /// The position.
     /// </summary>
-    public class EmploymentPeriod
+    public class Position
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the end.
+        /// Gets or sets the hourly rate.
         /// </summary>
-        public DateTime End { get; set; }
+        public decimal HourlyRate { get; set; }
 
         /// <summary>
         /// Gets or sets the id.
@@ -31,9 +29,9 @@ namespace Timesharp.Models
         public int ID { get; set; }
 
         /// <summary>
-        /// Gets or sets the start.
+        /// Gets or sets the title.
         /// </summary>
-        public DateTime Start { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the user.
@@ -41,5 +39,7 @@ namespace Timesharp.Models
         public virtual User User { get; set; }
 
         #endregion
+
+        // TODO: is hourly rate the best way to represent this?
     }
 }
