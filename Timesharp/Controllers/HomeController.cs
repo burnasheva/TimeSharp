@@ -15,7 +15,5 @@ namespace Timesharp.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        #region Public Methods and Operators
-        #endregion
     }
 }
