@@ -32,7 +32,7 @@ namespace Timesharp
         /// </param>
         public void Configuration(IAppBuilder app)
         {
-            this.ConfigureAuth(app);
+           ConfigureAuth(app);
         }
 
         #endregion

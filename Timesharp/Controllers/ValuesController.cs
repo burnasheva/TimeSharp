@@ -14,7 +14,6 @@ namespace Timesharp.Controllers
     /// <summary>
     ///     The values controller.
     /// </summary>
-    [Authorize]
     public class ValuesController : ApiController
     {
         #region Public Methods and Operators

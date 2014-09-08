@@ -29,9 +29,19 @@ namespace Timesharp.Controllers
         /// <summary>
         /// The db.
         /// </summary>
-        private readonly TimesharpDbContext db = new TimesharpDbContext();
+        private readonly ITimesharpDbContext db = new TimesharpDbContext();
 
         #endregion
+
+        public PositionController()
+        {
+            
+        }
+
+        public PositionController(ITimesharpDbContext context)
+        {
+            db = context;
+        }
 
         #region Public Methods and Operators
 
@@ -141,7 +151,7 @@ namespace Timesharp.Controllers
                 return this.BadRequest();
             }
 
-            this.db.Entry(position).State = EntityState.Modified;
+            this.db.MarkAsModified(position);
 
             try
             {

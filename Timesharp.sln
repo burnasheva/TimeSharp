@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesharp", "Timesharp\Time
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesharp.Tests", "Timesharp.Tests\Timesharp.Tests.csproj", "{DA8D8188-1645-4A4A-AA21-81EAFD7D78F1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{03048D5E-2BA2-44D5-A24E-CBC8BFAFA989}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesharp.AcceptanceTests", "Timesharp.AcceptanceTests\Timesharp.AcceptanceTests.csproj", "{B10E905A-FF67-4590-B3A5-F4C7CB34A1B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{DA8D8188-1645-4A4A-AA21-81EAFD7D78F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA8D8188-1645-4A4A-AA21-81EAFD7D78F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA8D8188-1645-4A4A-AA21-81EAFD7D78F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B10E905A-FF67-4590-B3A5-F4C7CB34A1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B10E905A-FF67-4590-B3A5-F4C7CB34A1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B10E905A-FF67-4590-B3A5-F4C7CB34A1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B10E905A-FF67-4590-B3A5-F4C7CB34A1B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
